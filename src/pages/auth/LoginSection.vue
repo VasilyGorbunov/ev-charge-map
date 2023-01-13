@@ -16,20 +16,20 @@
       <div class="q-pa-md q-gutter-md">
         <div class="text-center">Login to the system!</div>
 
-        <q-input outlined stack-label label="Email">
+        <q-input v-model="email" outlined stack-label label="Email">
           <template v-slot:append>
             <q-icon name="close"/>
           </template>
         </q-input>
 
-        <q-input outlined stack-label label="Password">
+        <q-input v-model="password" outlined stack-label label="Password">
           <template v-slot:append>
             <q-icon name="close"/>
           </template>
         </q-input>
 
         <div>
-          <q-btn color="black" size="lg" class="full-width" label="Login"/>
+          <q-btn @click="login" color="black" size="lg" class="full-width" label="Login"/>
         </div>
 
         <div class="q-px-md q-mt-xl text-center">
@@ -45,6 +45,23 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { server } from "boot/axios";
+
+const email = ref('')
+const password = ref('')
+
+const login = async () => {
+  await server.get('/sanctum/csrf-cookie')
+  await server.post('login', {
+    email: email.value,
+    password: password.value
+  })
+
+  const res = await server.get('/api/user')
+
+  console.log(res)
+}
 
 </script>
 
