@@ -6,7 +6,7 @@
   "author": "VasilyGorbunov <vasily.gorbunov@gmail.com>",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "dev": "yarn quasar dev --watch"
   },
   "dependencies": {
     "axios": "^0.21.1",
