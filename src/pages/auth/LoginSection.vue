@@ -54,11 +54,15 @@ const email = ref('')
 const password = ref('')
 
 const login = async () => {
-  await userStore.getSanctumCookie()
-  await userStore.login(email.value, password.value)
-  const user = await userStore.fetchUser()
-  console.log(user)
-  userStore.setUser(user.data)
+  try {
+    await userStore.getSanctumCookie()
+    await userStore.login(email.value, password.value)
+    const user = await userStore.fetchUser()
+    console.log(user)
+    userStore.setUser(user.data)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 </script>

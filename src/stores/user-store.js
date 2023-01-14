@@ -62,4 +62,5 @@ export const useUserStore = defineStore('user', {
       this.email = null
     }
   },
+  persist: true
 });

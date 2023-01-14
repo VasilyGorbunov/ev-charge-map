@@ -70,11 +70,16 @@ const password = ref('')
 const confirmPassword = ref('')
 
 const register = async () => {
-  await userStore.getSanctumCookie()
-  await userStore.register(firstName.value, lastName.value, email.value, password.value, confirmPassword.value)
-  const user = await userStore.fetchUser()
-  console.log(user)
-  userStore.setUser(user.data)
+  try {
+    await userStore.getSanctumCookie()
+    await userStore.register(firstName.value, lastName.value, email.value, password.value, confirmPassword.value)
+    const user = await userStore.fetchUser()
+    console.log(user)
+    userStore.setUser(user.data)
+  } catch (error) {
+    console.log(error)
+  }
+
 }
 
 </script>
